@@ -1,0 +1,5 @@
+.env
+examples/report*.json
+examples/revised*.md
+__pycache__/
+*.pyc
