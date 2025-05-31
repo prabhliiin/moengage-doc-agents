@@ -8,14 +8,14 @@ from gemini_api import get_gemini_response
 
 
 def analyze_article(url):
-    print(f"🔍 Extracting content from: {url}")
+    print(f"Extracting content from: {url}")
     raw_text = extract_text_from_url(url)
 
-    # ✅ Compute readability scores
+    # Compute readability scores
     flesch_score = textstat.flesch_reading_ease(raw_text)
     fog_score = textstat.gunning_fog(raw_text)
 
-    # ✨ Prepare Gemini prompt
+    # Prepare Gemini prompt
     prompt = f"""
 You're an AI documentation improvement agent.
 
@@ -41,10 +41,10 @@ Completeness: [Assessment + Suggestions]
 Style: [Assessment + Suggestions]
 """
     
-    print("🧠 Sending prompt to Gemini...")
+    print("Sending prompt to Gemini...")
     ai_response = get_gemini_response(prompt)
 
-    # 📦 Structure the final output
+    # Structure the final output
     output = {
         "url": url,
         "readability_score": {
@@ -54,16 +54,16 @@ Style: [Assessment + Suggestions]
         "gemini_analysis": ai_response
     }
 
-    # 📁 Ensure output directory exists
+    # Ensure output directory exists
     output_dir = "examples"
     os.makedirs(output_dir, exist_ok=True)
 
-    # 💾 Save to JSON file
+    # Save to JSON file
     output_path = os.path.join(output_dir, "report.json")
     with open(output_path, "w") as f:
         json.dump(output, f, indent=2)
 
-    print(f"✅ Analysis saved to {output_path}")
+    print(f"Analysis saved to {output_path}")
     
     # Return the output so it can be used
     return output

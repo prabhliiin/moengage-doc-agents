@@ -15,13 +15,13 @@ def rewrite_article(url, suggestions_text):
         str: The revised article text
     """
     try:
-        print(f"🔍 Extracting original content from: {url}")
+        print(f"Extracting original content from: {url}")
         original = extract_text_from_url(url)
         
         if not original or len(original.strip()) == 0:
             raise ValueError("No content extracted from URL")
         
-        print("✨ Preparing rewrite prompt...")
+        print("Preparing rewrite prompt...")
         prompt = f"""You are an expert technical documentation editor specializing in marketing content.
 
 Your task is to completely rewrite the following article by applying the improvement suggestions provided.
@@ -44,7 +44,7 @@ REWRITING INSTRUCTIONS:
 
 Please provide the complete rewritten article:"""
 
-        print("🧠 Generating revised content...")
+        print("Generating revised content...")
         revised = get_gemini_response(prompt)
         
         if not revised:
@@ -59,14 +59,14 @@ Please provide the complete rewritten article:"""
         with open(output_path, "w", encoding="utf-8") as f:
             f.write(revised)
         
-        print(f"✅ Revised article saved to {output_path}")
-        print(f"📊 Original length: {len(original)} characters")
-        print(f"📊 Revised length: {len(revised)} characters")
+        print(f"Revised article saved to {output_path}")
+        print(f"Original length: {len(original)} characters")
+        print(f"Revised length: {len(revised)} characters")
         
         return revised
         
     except Exception as e:
-        error_msg = f"❌ Error rewriting article: {str(e)}"
+        error_msg = f"Error rewriting article: {str(e)}"
         print(error_msg)
         return error_msg
 
@@ -95,7 +95,7 @@ def rewrite_from_analysis_file(url, analysis_json_path="examples/report.json"):
         return rewrite_article(url, suggestions)
         
     except Exception as e:
-        error_msg = f"❌ Error reading analysis file: {str(e)}"
+        error_msg = f"Error reading analysis file: {str(e)}"
         print(error_msg)
         return error_msg
 
@@ -124,4 +124,4 @@ if __name__ == "__main__":
         result = rewrite_from_analysis_file(url)
     
     if not result.startswith("❌"):
-        print("🎉 Rewrite completed successfully!")
+        print("Rewrite completed successfully!")
